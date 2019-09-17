@@ -13,6 +13,7 @@ import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { DropdownDirective } from './shared/dropdown.directive';
 
 
 
@@ -26,6 +27,7 @@ import { AlertModule } from 'ngx-bootstrap/alert';
     RecipesItemComponent,
     ShoppingListComponent,
     ShoppingEditComponent,
+    DropdownDirective,
 
 
   ],

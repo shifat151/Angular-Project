@@ -9,18 +9,13 @@ import { ShoppingListService } from './shopping-list.service';
 
 })
 export class ShoppingListComponent implements OnInit {
-  ingredients:Ingredient[];
 
   constructor(private slService:ShoppingListService) { }
 
-  ngOnInit() {
-    this.ingredients=this.slService.getIngredients();
-    //Detect the add ingredient change and show
-    this.slService.ingredientsChanged.subscribe(
-      (ingredients:Ingredient[])=>{
-        this.ingredients=ingredients;
-      }
-    );
-  }
+  ngOnInit() {}
+
+  // onAdd(){
+  //   this.slService.addIngredients(new Ingredient('Coconut',10));
+  // }
 
 }

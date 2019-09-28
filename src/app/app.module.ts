@@ -15,6 +15,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { DropdownDirective } from './shared/dropdown.directive';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
+import { AppRoutingModule } from './app-routing.module';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
+import { ShoppingListShowComponent } from './shopping-list/shopping-list-show/shopping-list-show.component';
+import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 
 
 
@@ -29,6 +34,10 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
     ShoppingListComponent,
     ShoppingEditComponent,
     DropdownDirective,
+    ErrorPageComponent,
+    RecipeStartComponent,
+    ShoppingListShowComponent,
+    RecipeEditComponent,
 
 
   ],
@@ -36,6 +45,7 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
     BrowserModule,
     BrowserAnimationsModule,
     AlertModule.forRoot(),
+    AppRoutingModule
 
   ],
   providers: [ShoppingListService],

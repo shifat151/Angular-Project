@@ -1,16 +1,21 @@
-<p>Recipe List work</p>
-
-<div class="row">
+<p>Recipe List component work</p>
+<div style="outline: 2px dashed red">
+  <div class="row">
   <div class="col-sm-12">
-    <button class="button btn btn-success">New Recipe</button>
+    <button class="button btn btn-success" (click)="onAddRecipe()">New Recipe</button>
   </div>
 </div>
 <hr>
 <div class="row">
     <div class="col-sm-12">
-        <app-recipes-item *ngFor="let recipeEl of recipes"
-         [recipe]=recipeEl></app-recipes-item>
+        <app-recipes-item
+         *ngFor="let recipeEl of recipes; let i=index"
+         [recipe]="recipeEl"
+          [index]="i">
+        </app-recipes-item>
     </div>
 </div>
+</div>
+
 
 

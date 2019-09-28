@@ -1,0 +1,15 @@
+<p>shopping-list-show components works!</p>
+
+<div style="outline: 2px dashed red">
+    <div class="row">
+        <div class="col-sm-12">
+            <ul class="list-group">
+                <a class="list-group-item"
+                style="cursor:pointer"
+                *ngFor="let ingredient of ingredients">
+                {{ingredient.name}} ({{ingredient.amount}})
+                </a>
+            </ul>
+        </div>
+  </div>
+</div>

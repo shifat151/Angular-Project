@@ -1,22 +1,32 @@
+<p >Shopping list component works</p>
 
-<div class="row">
-  <div class="col-sm-12">
-    <app-shopping-edit ></app-shopping-edit>
-  </div>
+
+<div style="outline:2px solid blue">
+    <!-- <div>
+        <button class="btn btn-primary" (click)="onAdd()">Add Shopping</button>
+    </div> -->
+
+    <div>
+        <div class="row">
+          <div class="col-sm-12">
+            <app-shopping-edit ></app-shopping-edit>
+          </div>
+        </div>
+      <div>
+  <br>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+
+
+
+
 </div>
-<div>
-    <p>Shopping list work</p>
-<div class="row">
-  <div class="col-sm-12">
-      <ul class="list-group">
-          <a class="list-group-item"
-           style="cursor:pointer"
-           *ngFor="let ingredient of ingredients">
-          {{ingredient.name}} ({{ingredient.amount}})
-          </a>
-      </ul>
-  </div>
-</div>
+
+
 
 
 

@@ -1,4 +1,93 @@
 <p>recipe-edit Component works!</p>
-<div style='outline: 2px dashed red'>
+<div class="container" style='outline: 2px dashed red'>
 
+  <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col-sm-12">
+      <button class="btn btn-outline-primary"
+       type="submit"
+       [disabled]="!recipeForm.valid">Save</button>
+      <button class="btn btn-outline-danger"
+      (click)="onCancel()">Cancel</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+
+        <div class="form-group">
+          <label >Name</label>
+          <input type="text" class="form-control"
+           placeholder="Enter Recipe Name"
+           formControlName="name">
+          <small  class="form-text text-muted">Please enter the recipe name</small>
+        </div>
+
+        <div class="form-group">
+          <label for="imagePath">Image URL</label>
+          <input type="text"
+           class="form-control"
+            placeholder="url"
+            formControlName="imagePath"
+            #imagePaths>
+          <small  class="form-text text-muted">Please enter the URL of the image</small>
+        </div>
+
+        <div class="row">
+          <img [src]="imagePaths.value" alt="" class="img-thumbnail">
+        </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Description</label>
+          <textarea class="form-control"
+           rows="3"
+           formControlName="description">
+          </textarea>
+        </div>
+
+        <div class="row" >
+          <div class="col-sm-12" formArrayName="ingredients">
+            <div class="row" *ngFor="let ingredientCtr of getControls(); let i=index"
+            [formGroupName]="i">
+                <div class="col-sm-8">
+                    <input
+                     type="text"
+                     class="form-control"
+                     formControlName="name">
+                  </div>
+                  <div class="col-sm-2">
+                    <input
+                    type="text"
+                    class="form-control"
+                    formControlName="amount">
+                  </div>
+                  <div class="col-sm-2">
+                    <button type="button" class="btn btn-outline-danger" (click)="onDeleteIngredient(i)">
+                      X
+                    </button>
+                  </div>
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <button
+      type="button"
+       class="btn btn-outline-success"
+       (click)="onAddIngredient()">
+        Add ingredient
+      </button>
+    </div>
+  </div>
+
+</form>
 </div>

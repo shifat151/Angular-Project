@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 export class ShoppingListShowComponent implements OnInit, OnDestroy {
    ingredients: Ingredient[];
    private igChangeSub: Subscription;
+
   constructor( private slService: ShoppingListService) { }
 
   ngOnInit() {
@@ -21,6 +22,12 @@ export class ShoppingListShowComponent implements OnInit, OnDestroy {
       }
     );
 
+  }
+
+
+  //for showing the values in the list passing the indext value to shopping edit
+  onEditItem(index:number){
+    this.slService.startedEditing.next(index);
   }
   ngOnDestroy(): void {
     this.igChangeSub.unsubscribe();

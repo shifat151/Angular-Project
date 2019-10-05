@@ -1,8 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-
-
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { RecipesComponent } from './recipes/recipes.component';
@@ -20,6 +17,9 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { ShoppingListShowComponent } from './shopping-list/shopping-list-show/shopping-list-show.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms'
+import { RouterModule } from '@angular/router';
+import { RecipeService } from './recipes/recipe.service';
 
 
 
@@ -44,11 +44,15 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AlertModule.forRoot(),
-    AppRoutingModule
+    FormsModule,
+    AppRoutingModule,
+    ReactiveFormsModule
+
+
 
   ],
-  providers: [ShoppingListService],
+  providers: [ShoppingListService,
+              RecipeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -22,6 +22,7 @@ export class RecipeEditComponent implements OnInit {
     private router:Router) { }
 
   ngOnInit() {
+    // getting the Id by routing
     this.route.params.subscribe(
       (params: Params) => {
         this.id = +params['id'];
@@ -44,10 +45,13 @@ export class RecipeEditComponent implements OnInit {
     } else{
       this.recipeService.addRecipe(this.recipeForm.value);
     }
+    console.log(this.recipeForm);
     this.recipeForm.reset();
     this.onCancel();
 
   }
+
+  //For Addidng ingredient in edit mode
   onAddIngredient(){
     (<FormArray> this.recipeForm.get('ingredients')).push(
       new FormGroup({

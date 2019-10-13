@@ -19,7 +19,10 @@ import { ShoppingListShowComponent } from './shopping-list/shopping-list-show/sh
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 import { RecipeService } from './recipes/recipe.service';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import { AuthComponent } from './Auth/auth.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { AuthInterceptorService } from './Auth/auth-interceptor.service';
 
 
 
@@ -38,6 +41,8 @@ import {HttpClientModule} from '@angular/common/http';
     RecipeStartComponent,
     ShoppingListShowComponent,
     RecipeEditComponent,
+    AuthComponent,
+    LoadingSpinnerComponent
 
 
   ],
@@ -47,14 +52,16 @@ import {HttpClientModule} from '@angular/common/http';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
 
 
 
 
   ],
   providers: [ShoppingListService,
-              RecipeService],
+              RecipeService,
+            {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptorService,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

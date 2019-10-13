@@ -9,10 +9,15 @@ import { RecipesDetailComponent } from './recipes/recipes-detail/recipes-detail.
 import { ShoppingListShowComponent } from './shopping-list/shopping-list-show/shopping-list-show.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeResolverService } from './recipes/recipes-resolver.service';
+import { ShoppingListService } from './shopping-list/shopping-list.service';
+import { AuthComponent } from './Auth/auth.component';
+import { AuthGuard } from './Auth/auth.gurd';
 
 const appRoute:Routes=[
     {path:'', redirectTo:'/recipes', pathMatch:'full'},
-    {path:'recipes',component:RecipesComponent, children:[
+    {path:'recipes',component:RecipesComponent,
+    canActivate:[AuthGuard],
+    children:[
     {path:'', component:RecipeStartComponent},
     {path:'new', component:RecipeEditComponent},
     {path:":id",
@@ -26,6 +31,8 @@ const appRoute:Routes=[
   {path:'shopping-list', component:ShoppingListComponent, children:[
     {path:'', component:ShoppingListShowComponent}
   ]},
+
+  {path:'auth', component:AuthComponent}
   // {path:'error-page', component:ErrorPageComponent},
   // {path:'**', redirectTo:'/error-page'}
 ]

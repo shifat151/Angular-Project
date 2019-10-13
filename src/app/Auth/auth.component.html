@@ -1,0 +1,58 @@
+<div class="row justify-content-center vertical-center">
+
+  <div class="col-sm-6">
+      <div class="alert alert-danger"  *ngIf="error" style="text-align: center;">
+        <p>{{error}}</p>
+      </div>
+      <div *ngIf="isLoading " style="text-align:center;">
+        <app-loading-spinner></app-loading-spinner>
+      </div>
+
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading" >
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input type="text" formControlName="email" id="email" class="form-control" placeholder="Enter email">
+            </div>
+            <div class="alert alert-danger" role="alert"
+            *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched"
+              >Please enter valid Email
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password"
+              formControlName="password"
+              id="password"
+              class="form-control"
+              placeholder="Password"
+              #Password >
+            </div>
+            <div class="alert alert-danger" role="alert"
+            *ngIf="signupForm.get('password').touched && Password.value==''"
+            >Please enter password</div>
+
+            <div class="alert alert-danger" role="alert"
+            *ngIf="!signupForm.get('password').valid && signupForm.get('password').touched"
+            >Your Password should be more than 5 digits
+            </div>
+
+            <div class="row justify-content-center">
+
+              <button class="btn btn-outline-primary"  type="submit"
+              [disabled]=" !signupForm.valid">
+                {{isLoginMode?'Login':'Signup'}}
+              </button>
+
+                <button class="btn btn-outline-info" type="button" (click)="onSwitchMode()">
+                  switch to {{isLoginMode ? 'Signup':'Login'}}
+                </button>
+            </div>
+
+          </form>
+    </div>
+
+
+
+
+
+
+</div>

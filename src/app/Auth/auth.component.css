@@ -1,0 +1,21 @@
+
+
+input.ng-invalid.ng-touched{
+  border:1px solid red;
+}
+
+input.ng-valid{
+  border:1 px solid green;
+}
+.btn{
+  margin: 2px;
+}
+.vertical-center {
+  min-height: 91%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 91vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+
+

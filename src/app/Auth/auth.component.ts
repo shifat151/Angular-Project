@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ComponentFactoryResolver, ViewChild, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService, AuthResponseData } from './auth.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import {AlertComponent} from '../shared/alert/alert.component';
+import { PlaceholderDirective } from '../shared/placeholder/placeholder.directive';
 
 @Component({
   selector: 'app-auth',
@@ -10,15 +12,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./auth.component.css']
 })
 
-export class AuthComponent implements OnInit {
+export class AuthComponent implements OnInit, OnDestroy {
   isLoginMode = true;
-  isLoading=false;
+  isLoading = false;
   signupForm: FormGroup;
-  error:string=null;
+  error: string = null;
+  @ViewChild(PlaceholderDirective, {static: false}) alertHost: PlaceholderDirective;
+
+  private closeSub: Subscription;
 
 
   constructor(private authService: AuthService,
-              private router:Router){}
+              private router: Router,
+              private componentFactoryResolver: ComponentFactoryResolver) {}
 
 
   ngOnInit(): void {
@@ -50,33 +56,56 @@ export class AuthComponent implements OnInit {
     const email = this.signupForm.get('email').value;
     const password = this.signupForm.get('password').value;
 
-    let authObs:Observable<AuthResponseData>;
+    let authObs: Observable <AuthResponseData>;
 
-    this.isLoading=true;
+    this.isLoading = true;
 
     if (this.isLoginMode) {
-     authObs= this.authService.login(email,password);
+     authObs = this.authService.login(email, password);
+    } else {
+     authObs = this.authService.signup(email, password);
     }
-    else{
-     authObs= this.authService.signup(email, password);
-    }
-
+    // For getting access to response data from server
     authObs.subscribe(
       responseData => {
         console.log(responseData);
-        this.isLoading=false;
+        this.isLoading = false;
         this.router.navigate(['/recipes']);
 
       },
       errorMessage => {
         // console.log(errorResponse.error.error.message);
-        this.error=errorMessage;
-        this.isLoading=false;
+        // this.error=errorMessage;
+        this.showErrorAlert(errorMessage);
+        this.isLoading = false;
       }
     );
     this.signupForm.reset();
 
     }
 
+    onHandleError() {
+      this.error = null;
+    }
+    // For showing alert component dynamically
+    private showErrorAlert(message: string) {
+    const alertCmpFactory =  this.componentFactoryResolver.
+    resolveComponentFactory(AlertComponent);
+    const hostViewContainerRef = this.alertHost.viewContainerRef;
+    hostViewContainerRef.clear();
+    const componentRef = hostViewContainerRef.createComponent(alertCmpFactory);
+    componentRef.instance.message = message;
+    this.closeSub = componentRef.instance.close.subscribe(() => {
+      this.closeSub.unsubscribe();
+      hostViewContainerRef.clear();
+    });
+  }
 
+  ngOnDestroy(): void {
+    // Called once, before the instance is destroyed.
+    // Add 'implements OnDestroy' to the class.
+    if (this.closeSub) {
+      this.closeSub.unsubscribe();
+    }
+  }
 }
